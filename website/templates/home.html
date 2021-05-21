@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category %}
+{% block content %}
+
+	<div id="content" class="site-content">
+			<div id="primary" class="content-area column full">
+				<main id="main" class="site-main">
+				<div class="grid portfoliogrid">
+
+					{% for category in categories %}
+					<div>
+						<article class="hentry">
+						<header class="entry-header">
+						<div class="entry-thumbnail">
+							<img src="{{category.image.url}}" style="height:200px;" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1"/>
+						</div>
+						<h2 class="entry-title">
+							<form action="shop.html" method="POST">
+								{% csrf_token %}
+								<button style="color:white;border-radius: 8px;background-color: #555555;" name="category_id" value="{{category.id}}">{{category.name}}</button>
+							</form>
+						</h2>
+							{% for subcategory in subcategories %}
+								{% if subcategory.category.id == category.id %}
+									<form action="shop.html" method="POST">
+										{% csrf_token %}
+										<button name="subcategory_id" value="{{subcategory.id}}" style="margin:2px;background-color:white;">{{subcategory.name}}</button>
+									</form>
+								{% endif %}
+							{% endfor %}
+						</header>
+						</article>
+					{% endfor %}
+					</div>
+
+				</div>
+				<!-- .grid -->
+				<br/>
+				</main>
+				<!-- #main -->
+			</div>
+			<!-- #primary -->
+		</div>
+
+{% endblock %}

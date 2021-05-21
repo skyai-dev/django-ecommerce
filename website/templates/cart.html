@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filter %}
+{% load cart %}
+{% block content %}
+
+
+<div id="content" class="site-content" style="margin:20px;">
+	<div id="primary" class="content-area column full">
+		<main id="main" class="site-main">
+            <h3>Your Cart</h3>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr_No</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price|currency}}</td>
+                        <td>{{product|cart_quantity:request.session.cart}}</td>
+                        <td>{{product|price_total:request.session.cart|currency}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th>Total</th>
+                        <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <hr>
+
+          <div style="float:right;margin:0px;padding:0px;">
+              <h5>Check Out Form</h5>
+              <form action="/checkout" method="POST">
+                  {% csrf_token %}
+                  <input style="margin:3px;" type="text" name="address" placeholder="address">
+                  <br/>
+                  <input style="margin:3px;" type="text" name="phone" placeholder="phone">
+                  <br/>
+                  <input style="margin:3px;" type="submit" class="btn float-right btn-outline-info col-lg-6" value="Check Out">
+              </form>
+          </div>
+		</main>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
