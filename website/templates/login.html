@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div id="content" class="site-content" style="margin:20px;">
+	<div id="primary" class="content-area column full">
+		<main id="main" class="site-main">
+				{{error}}
+				<h1 class="entry-title">Login Here</h1>
+							<form class="wpcf7" method="post" action="login.html">
+								{% csrf_token %}
+								<div class="form">
+									<p><input type="text" name="email" placeholder="E-mail Address *"></p>
+									<p><input type="text" name="password" placeholder="Password *"></p>
+									<input type="submit" id="submit" class="clearfix btn" value="Log In">
+								</div>
+							</form>
+		</main>
+	</div>
+</div>
+
+
+{% endblock %}

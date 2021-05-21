@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HandiCrafts India | One Place for all variety of HandiCrafts</title>
+<link rel='stylesheet' href='{% static 'website/css/woocommerce-layout.css' %}' type='text/css' media='all'/>
+<link rel='stylesheet' href='{% static 'website/css/woocommerce-smallscreen.css' %}' type='text/css' media='only screen and (max-width: 768px)'/>
+<link rel='stylesheet' href='{% static 'website/css/woocommerce.css' %}' type='text/css' media='all'/>
+<link rel='stylesheet' href='{% static 'website/css/font-awesome.min.css' %}' type='text/css' media='all'/>
+<link rel='stylesheet' href='{% static 'website/style.css' %}' type='text/css' media='all'/>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
+<link rel='stylesheet' href='{% static 'website/css/easy-responsive-shortcodes.css' %}' type='text/css' media='all'/>
+</head>
+<body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
+<div id="page">
+	<div class="container">
+		<header id="masthead" class="site-header">
+		<div class="site-branding">
+			<img src='{% static 'website/images/logo.JPG' %}' style="height: 40%; width: 40%;" />
+			<h3 class="site-description" style="font-size: 120%;">One Place For All Variety of Handicrafts</h3>
+		</div>
+		<nav id="site-navigation" class="main-navigation">
+		<button class="menu-toggle">Menu</button>
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<div class="menu-menu-1-container">
+			<ul id="menu-menu-1" class="menu">
+				<li><a href="/">Home</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="shop.html">Shop</a></li>
+				{% if request.session.customer_name %}
+					<li><a href="#">{{request.session.customer_name}}</a>
+						{% else %}
+						<li><a href="#">user</a>
+				{% endif %}
+
+				<ul class="sub-menu">
+					{% if not request.session.customer %}
+					<li><a href="login.html">Log In</a></li>
+					<li><a href="signup.html">Sign Up</a></li>
+					{% else %}
+					<li><a href="orders.html">Orders</a></li>
+					<li><a href="logout">Logout</a></li>
+					{% endif %}
+					<li><a href="cart.html">Cart ({{request.session.cart|length}})</a></li>
+				</ul>
+				</li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</div>
+		</nav>
+		</header>
+		{% block content %}{% endblock %}
+	</div>
+	<!-- .container -->
+	<footer id="colophon" class="site-footer">
+	<div class="container">
+		<div class="site-info">
+			 <a target="blank" href="https://www.wowthemes.net/">&copy; Sandook HandiCrafts - Managed by SkyAI Team</a>
+		</div>
+	</div>	
+	</footer>
+	<a href="#top" class="smoothup" title="Back to top">
+		<span class="genericon genericon-collapse"></span></a>
+</div>
+<!-- #page -->
+
+<script src='{% static 'website/js/jquery.js' %}'></script>
+<script src='{% static 'website/js/plugins.js' %}'></script>
+<script src='{% static 'website/js/scripts.js' %}'></script>
+<script src='{% static 'website/js/masonry.pkgd.min.js' %}'></script>
+</body>
+</html>
